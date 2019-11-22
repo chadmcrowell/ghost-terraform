@@ -1,0 +1,18 @@
+trigger:
+- master
+
+pool:
+  name: Azure Pipelines
+
+steps:
+- task: CopyFiles@2
+  displayName: 'Copy Terraform Files to Staging'
+  inputs:
+    SourceFolder: Terraform
+    TargetFolder: '$(build.artifactstagingdirectory)/Terraform'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
+
+
