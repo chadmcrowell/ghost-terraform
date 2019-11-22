@@ -82,7 +82,7 @@ resource "azurerm_virtual_machine" "ghost_vm" {
         disable_password_authentication = true
         ssh_keys {
             path = "/home/chad/.ssh/authorized_keys"
-            key_data = "${var.key_data}"
+            key_data = "__storagekey__"
         }
     }
 }
