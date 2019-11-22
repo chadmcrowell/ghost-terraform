@@ -2,7 +2,8 @@ trigger:
 - master
 
 pool:
-  name: Azure Pipelines
+  name: "Azure Pipelines"
+
 
 steps:
 - task: CopyFiles@2
