@@ -1,12 +1,21 @@
-resource "azurerm_resource_group" "test" {
+resource "azurerm_resource_group" "prod" {
   name     = "${var.resource_group_name}"
   location = "${var.location}"
 }
+# storing terraform state in azure storage account
+ backend "azurerm" {
+  storage_account_name = "__terraformstorageaccount__"
+    container_name     = "terraform"
+    key                = "terraform.tfstate"
+	access_key         = "__storagekey__"
+    sshkey             = "__sshkey__"
+}
+
 # Create virtual network
 resource "azurerm_virtual_network" "ghost_vnet" {
-    name = "labVNET"
-    address_space = ["10.0.0.0/16"]
-    location = "${var.location}"
+    name                = "labVNET"
+    address_space       = ["10.0.0.0/16"]
+    location            = "${var.location}"
     resource_group_name = "${var.resource_group_name}"
 }
 
@@ -82,7 +91,7 @@ resource "azurerm_virtual_machine" "ghost_vm" {
         disable_password_authentication = true
         ssh_keys {
             path = "/home/chad/.ssh/authorized_keys"
-            key_data = "__sshkey__"
+            key_data = "$(var.sshkey)"
         }
     }
 }
