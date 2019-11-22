@@ -1,16 +1,18 @@
+ terraform {
+  required_version = ">= 0.11" 
+ # storing terraform state in azure storage account
+ backend "azurerm" {
+  storage_account_name = "__terraformstorageaccount__"
+    container_name       = "terraform"
+    key                  = "terraform.tfstate"
+	access_key           = "__storagekey__"
+    sshkey               = "__sshkey__"
+	}
+}
 resource "azurerm_resource_group" "prod" {
   name     = "${var.resource_group_name}"
   location = "${var.location}"
 }
-# storing terraform state in azure storage account
- backend "azurerm" {
-  storage_account_name = "__terraformstorageaccount__"
-    container_name     = "terraform"
-    key                = "terraform.tfstate"
-	access_key         = "__storagekey__"
-    sshkey             = "__sshkey__"
-}
-
 # Create virtual network
 resource "azurerm_virtual_network" "ghost_vnet" {
     name                = "labVNET"
