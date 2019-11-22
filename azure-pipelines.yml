@@ -2,8 +2,7 @@ trigger:
 - master
 
 pool:
-  name: "Azure Pipelines"
-
+  vmImage: 'windows-latest'
 
 steps:
 - task: CopyFiles@2
