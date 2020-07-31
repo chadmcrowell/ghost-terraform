@@ -13,6 +13,7 @@ resource "azurerm_resource_group" "prod" {
   name     = "${var.resource_group_name}"
   location = "${var.location}"
 }
+
 # Create virtual network
 resource "azurerm_virtual_network" "ghost_vnet" {
     name                = "labVNET"
